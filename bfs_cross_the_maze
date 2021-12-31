@@ -1,0 +1,55 @@
+Cross the Maze https://www.codechef.com/problems/CDZ14C
+
+
+# coding=utf-8
+# This is a sample Python script.
+
+# Press ⌃R to execute it or replace it with your code.
+# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+
+
+
+def knight( graph, m, n):
+    queue = []
+    visited = [[0 for i in range(m)] for j in range(n)]
+    # print(visited)
+    queue.append([0, 0, 1])
+    visited[0][0] = 1
+
+    row = [-1, 0, 1, 0]
+    col = [0, -1, 0, 1]
+
+    while (len(queue) != 0):
+        current_node = queue.pop(0)
+        if (current_node[0] == (m-1) and current_node[1] == (n - 1)):
+            print(current_node[2])
+            #return (out[2])
+        dist = current_node[2]
+        for i in range(4):
+            x = row[i] + current_node[0]
+            y = col[i] + current_node[1]
+            if (x < m and y < n and x >= 0 and y >= 0 and graph[current_node[0]][current_node[1]] != graph[x][y]) and visited[x][y]==0 :
+                visited[x][y]=1
+                queue.append([x, y, dist + 1])
+
+
+    print(-1)
+
+
+T = input()
+for i in range(T):
+    m,n=int(input().split(' '))
+
+    graph=[[0 for i in range(m)] for j in range(n)]
+    for i in range(m):
+
+        str1 =str(input())
+        for k in range(len(str1)):
+            graph[i][k]=str1[k]
+
+
+    knight(graph, m, n)
+
+
+
+
